@@ -20,14 +20,14 @@ library(ggplot2)
 
 
 cohort_analysis <- function(event, cohort, timediff="hours", title="Awesome Null Title", ytitle=NULL) {
-    df<-data.frame(
+  
+   # customers are grouped into cohorts by the week they signed up
+   # time between signup and event is calculated based on preference, "hours", "days", "weeks", etc
+   df<-data.frame(
       weeks_signup = as.Date(cut(cohort, breaks= "week")),
       time_elapsed = floor(as.numeric(difftime(event, cohort, unit=timediff)))
     )
-    # customers are grouped into cohorts by the week they signed up
-   # df$weeks_signup <- as.Date(cut(cohort, breaks= "week"))
-    # time between signup and event is calculated based on preference, "hours", "days", "weeks", etc
-    #df$time_elapsed <- floor(as.numeric(difftime(event, cohort, unit=timediff)))
+    
     
     # calculate counts for customers in each signup cohort by week
     signup_totals <- data.frame(weeks_signup = df[,c('weeks_signup')])
